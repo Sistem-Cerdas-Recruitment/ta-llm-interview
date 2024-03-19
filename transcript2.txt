@@ -1,0 +1,23 @@
+INTERVIEWER:
+Can you tell me about a specific situation at Tokopedia where you were tasked with developing or improving a REST API using Django?
+
+CANDIDATE:
+In a previous project at Tokopedia, I worked on a web application, although it wasn't built with Django, it was built with Flask. I primarily handled frontend development with some backend work.                       
+
+INTERVIEWER:
+What specific task were you given regarding the backend work, particularly related to REST APIs, during that project?
+
+CANDIDATE:
+My backend experience there focused on using basic Python for data processing. The APIs that I built were for one of the microservices in the Tokopedia system.
+
+INTERVIEWER:
+Can you describe the actions you took to build those APIs for the microservices, especially given your primary focus was on frontend development?
+
+CANDIDATE:
+Well, I usually have a sprint meeting every 2 weeks and daily standup meetings. From the sprint meeting I gained the business requirements, and then gives updates and ask questions at the daily meetings. Since I was building a frontend service for the internal use of the company, I was also able to build any necessary APIs for the service. Building the APIs doesn't take much time compared to developing the front end.
+
+INTERVIEWER:
+What were the results or outcomes of your efforts in building those APIs for the service, in terms of performance, integration, or user feedback?
+
+CANDIDATE:
+The APIs work as intended in helping the frontend service according to the business requirements. I always finsihed my sprint tasks at the end of every sprint.

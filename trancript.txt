@@ -1,0 +1,25 @@
+INTERVIEWER:
+Since this is a Behavioral Event Interview focused on the candidate's ability to build well-structured REST APIs using Django, let's start with the situation:
+
+1. Can you describe a specific situation at Tokopedia where you were tasked with developing or improving a REST API using Django?
+
+CANDIDATE:
+Yes, I was in the backend development team at Tokopedia. My team was building a platform to manage inventory and sales data for a retail company. This required a well-structured database and APIs for interacting with the data from various systems.
+
+INTERVIEWER:
+2. What specific task were you responsible for within that project to build or improve the REST API?
+
+CANDIDATE:
+My responsibility was designing the Django models,  mapping them to database tables, and implementing the REST API endpoints according to the business requirements. 
+
+INTERVIEWER:
+3. What actions did you take to ensure that the models and REST API endpoints you were implementing would meet the business requirements effectively?
+
+CANDIDATE:
+I carefully analyzed the business requirements and designed models that accurately represented relationships between products, orders, and customers. I used Django's ORM effectively to write efficient database queries. For the API, I used the Django REST framework, ensuring proper serialization, pagination, and authentication.
+
+INTERVIEWER:
+4. Can you describe the results of your actions, particularly how your work on the Django models and REST API endpoints impacted the project or the organization as a whole?
+
+CANDIDATE:
+The models and APIs I developed provided a solid foundation, enabling seamless communication between the frontend, external systems, and the database. This streamlined data flow and enhanced overall application performance. The models and APIs that I developed ended up being pushed to the production server.
