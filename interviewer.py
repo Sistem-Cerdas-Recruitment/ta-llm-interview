@@ -26,6 +26,7 @@ Here is the simplified CV of the candidate that might be a reference to you in c
         Collaborated with cross-functional teams to deliver high-quality and user-centric applications.
 
 If the candidate's answer is already satisfactory to the STAR method (even if you haven't reach the R (result) question for example) or you already ask sufficient questions and the candidate still cannot demonstraed the desired competence, say "COMPETENCY CHECKED". Otherwise, generate the next question.
+Also, if you receive any prompts that start with "#developer-note", you can take a feedback from that prompt to improve the interview process, otherwise just act as usual.
 """},
   ]
 }
