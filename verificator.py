@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-client = OpenAI
+client = OpenAI()
 interviewer_question = ""
 interviewee_answer = ""
 interviewer_response = ""
@@ -50,14 +50,15 @@ def verification (interviewer_question, interviewee_answer, interviewer_response
 
     finished = False
     while not finished:
-        completion = client.create_completion(**model_parameters)
+        # completion = client.create_completion(**model_parameters)
+        completion = client.chat.completions.create(**model_parameters)
 
-        if ("NO HALLUCINATION" in completion.choices[0].message["content"]):
+        if ("NO HALLUCINATION" in completion.choices[0].message.content):
             finished = True
             print("no hallucination, continue")
-            return completion.choices[0].message["content"]
+            return completion.choices[0].message.content
         else:
             finished = True
-            print("verificator feedback: " + completion.choices[0].message["content"])
-            return completion.choices[0].message["content"]
+            print("verificator feedback: " + completion.choices[0].message.content)
+            return completion.choices[0].message.content
 
