@@ -1,0 +1,65 @@
+COMPETENCE: Ability to solve a complex code problem
+
+INTERVIEWER:
+Can you describe a situation from your past work experience where you had to solve a complex coding problem?
+
+INTERVIEWEE:
+In a previous software engineering position, I worked on coding problems for an internal department. An inexperienced software engineer had created the code but was on annual leave, so I could not contact him to discuss the issue.
+
+INTERVIEWER:
+What specific task were you assigned to solve in this situation, and what was the nature of the coding issue?
+
+INTERVIEWEE:
+Because the system was generating a wrong solution, I presumed it was a logic error, and after further investigation, I confirmed this was the issue.
+
+INTERVIEWER:
+What steps did you take to diagnose and solve the problem given the absence of the original coder?
+
+INTERVIEWEE:
+Therefore, I had to use a common sense approach for solving the problem. The most common errors junior software engineers unwittingly make are syntax and logic.
+
+INTERVIEWER:
+What was the outcome of your intervention?
+
+INTERVIEWEE:
+Once the problem had been rectified, I emailed the junior software engineer to explain the problem I had found and advised him on how to prevent it from reoccurring.
+
+-----
+
+COMPETENCE: The ability to deal with disagreement with your product manager or with your supervisor
+
+INTERVIEWER:
+Can you describe a challenging situation involving a disagreement with your manager about a technical decision at your previous company?
+
+INTERVIEWEE:
+My previous company had a very nice tech stack on  Microsoft Azure. And it had a lot of services and applications already up and running.
+But for that time, my manager wanted to create the microservice cluster from the existing monolith application, and it needed to be done on an urgent and immediate basis.
+In order to deploy everything in the cloud, there were some bureaucracies or some process that we might have to follow that would have caused some additional time constraint.
+So that is why the manager's approach was that because we needed to get this done as quickly as possible, he asked me to deploy everything on the on-premises servers.
+And once we deploy in the production, maybe we can think about what we need to do later because managing the monolith application was becoming a huge burden.
+
+INTERVIEWER:
+What specific responsibilities were you given in this project, and how did they conflict with your professional judgment or the company's strategic direction?
+
+INTERVIEWEE:
+I was responsible for breaking down that monolith application into the cluster of microservices.
+My team was short staffed and I was tasked to complete this by a certain deadline.
+But my approach was that since the rest of the company is already working on the cloud computing and we are trying to become a cloud native company where we are trying to get rid of all the on-premise servers and devices, my suggestion was that based on the experience, it would make more sense to deploy all of these things in the cloud and create a cloud native app from the scratch rather than building everything from the ground up and then deploying in the company server.
+
+INTERVIEWER:
+How did you approach this disagreement with your manager, and what steps did you take to advocate for your suggested strategy?
+
+INTERVIEWEE:
+I explained to my manager.I convinced them that since we are already trying to get rid of the on-premise services servers, they would be decommissioned soon.
+And even if we build everything right now we still would have to provide an additional resources and in order to move all of these, once again, back to the cloud.
+I did some calculation of the time, effort, and resources that will be spent to move to the on-premise and then once again, move to the cloud.
+I also did the same calculation if we just build everything from scratch and directly move to the cloud.
+I also had the model application broken down into a very good cluster of microservices for deployement in the cloud.
+I explained it to my manager.
+
+INTERVIEWER:
+What was the outcome of your discussions with your manager?
+
+INTERVIEWEE:
+My manager came to an agreement and we now have a more resilient cloud service.
+
