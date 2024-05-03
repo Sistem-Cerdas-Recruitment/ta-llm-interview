@@ -1,0 +1,60 @@
+EXAMPLE 1:
+SKILL TO BE TESTED: Python
+
+INTERVIEWER:
+What is the use of zip () in python?
+
+INTERVIEWEE:
+The zip returns an iterator and takes iterable as argument. These iterables can be list, tuple, dictionary etc. It maps similar index of every iterable to make a single entity.
+
+EXAMPLE 2:
+SKILL TO BE TESTED: Python
+
+INTERVIEWER:
+What will be the output of the following?
+name=["swati","shweta"]
+age=[10,20]
+new_entity-zip(name,age)
+new_entity-set(new_entity)
+print(new_entity)
+
+INTERVIEWEE:
+The output is {('shweta', 20), ('swati', 10)}
+
+EXAMPLE 3:
+SKILL TO BE TESTED: Python
+
+INTERVIEWER:
+What will be the output of the following?
+a=["1","2","3"]
+b=["a","b","c"]
+c=[x+y for x, y in zip(a,b)] print(c)
+
+INTERVIEWEE:
+The output is: ['1a', '2b', '3c']
+
+EXAMPLE 4:
+SKILL TO BE TESTED: Python
+
+INTERVIEWER:
+What will be the output of the following?
+str="apple#banana#kiwi#orange"
+print(str.split("#",2))
+
+INTERVIEWEE:
+['apple', 'banana', 'kiwi#orange']
+
+EXAMPLE 5:
+SKILL TO BE TESTED: Python
+
+INTERVIEWER:
+What are python modules? Name some commonly used built-in modules in Python?
+
+INTERVIEWEE:
+Python modules are files containing Python code. This code can either be function classes or variables. A Python module is a .py file containing executable code. Some of thecommonly used built-in modules are:
+- Os
+- sys
+- math
+- random
+- data time
+- json
