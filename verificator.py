@@ -1,8 +1,3 @@
-from langchain.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain.chains import SequentialChain, LLMChain
-from langchain.output_parsers import PydanticOutputParser
-from langchain.pydantic_v1 import BaseModel, Field
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -53,9 +48,9 @@ def verification (interviewer_question, interviewee_answer, interviewer_response
         # completion = client.create_completion(**model_parameters)
         completion = client.chat.completions.create(**model_parameters)
 
-        if ("NO HALLUCINATION" in completion.choices[0].message.content):
+        if ("no hallucination" in completion.choices[0].message.content):
             finished = True
-            print("no hallucination, continue")
+            print("no hallucination feedback: " + completion.choices[0].message.content)
             return completion.choices[0].message.content
         else:
             finished = True
