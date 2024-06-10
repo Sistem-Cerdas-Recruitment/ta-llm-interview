@@ -1,12 +1,6 @@
 from pydantic import BaseModel
-from typing import List, Annotated, Optional
+from typing import List, Annotated
 from fastapi import Query
-# from enum import Enum
-
-# class AllowedValues(str, Enum):
-#     value1 = "value1"
-#     value2 = "value2"
-#     value3 = "value3"
 
 class TranscriptListItem(BaseModel):
     role: Annotated[str, Query(regex="^(assistant|user)$")] 
