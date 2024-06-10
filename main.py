@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from PostTranscriptRequest_schema import PostTranscriptRequest
+from TranscriptListItem_schema import TranscriptListItem
 from PostTranscriptResponse_schema import PostTranscriptResponse
 from interviewer import generate_question
 
