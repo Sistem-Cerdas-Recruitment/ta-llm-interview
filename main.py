@@ -7,7 +7,7 @@ from interviewer import generate_question
 
 app = FastAPI()
 
-handler = Mangum(app)
+# handler = Mangum(app)
 
 @app.get("/", )
 async def health_check():
