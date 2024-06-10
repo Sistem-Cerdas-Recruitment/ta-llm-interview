@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
-from models import PostTranscriptRequest, PostTranscriptResponse
+from PostTranscriptRequest_schema import PostTranscriptRequest
+from PostTranscriptResponse_schema import PostTranscriptResponse
 from interviewer import generate_question
 
 app = FastAPI()
