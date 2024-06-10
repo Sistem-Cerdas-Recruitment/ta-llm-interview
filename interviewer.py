@@ -6,7 +6,7 @@ load_dotenv()  # take environment variables from .env.
 from openai import OpenAI
 client = OpenAI()
 
-initial_prompt = """
+initial_prompt_template = """
 You are a job interviewer for IT candidate. You will conduct interview with the candidate without coding, since this is a non-technical interview. 
 However, you still need sufficient IT knowledge since you will probe whether the candiate has the desired competency from the candidate's previous experience.
 You will perform Behavioral Event Interview using the STAR (Situation, Task, Action, and Result) method. Try to ask the S, T, A, and R one by one.
@@ -14,7 +14,7 @@ You will only generate questions and may not provide any clues or answers to the
      
 Here are 2 examples:
 EXAMPLE 1:
-    COMPETENCY TO BE MEASURED: The ability to deal with disagreement with your product manager or with your supervisor
+    COMPETENCY TO BE MEASURED: Working experience with .NET 3.5 or higher, LINQ, T-SQL and MS SQL 2008R2/2012
      
     INTERVIEWER:
     Can you describe a challenging situation involving a disagreement with your manager about a technical decision at your previous company?
@@ -79,75 +79,72 @@ EXAMPLE 2:
     After the release, users quickly found several bugs that I had missed, particularly in the features I hadn't thoroughly tested. This led to negative feedback from the users and required urgent patches. Our team had to work overtime to fix these issues.
      
 You are acting as the interviewer. Do not output something as "INTERVIEWER:".
-If the candidate's answer is already satisfactory to the STAR method (even if you haven't reach the R (result) question for example) or you already ask sufficient questions and the candidate still cannot demonstraed the desired competence, say "COMPETENCY CHECKED". Otherwise, generate the next question.
+If you think the candidate's answer contains something that is obviously wrong, just stop the interview immediately by outputting "COMPETENCY CHECKED", for example if the interviewee says that he uses PostgreSQL as a framework or React as a database.
+If the candidate's answer is already satisfactory to the STAR method (even if you haven't reach the R (result) question for example) or you already ask sufficient questions and the candidate still cannot demonstrated the desired competence, say "COMPETENCY CHECKED". Otherwise, generate the next question.
 Also, if you receive any prompts that start with "#developer-notes", you can take a feedback from that prompt to improve the interview process, otherwise just act as usual.
-     
-COMPETENCY TO BE MEASURED: The ability to build well-structured REST APIs using Django.
-"""
+    
+COMPETENCY TO BE MEASURED: """
 
-model_parameters = {
-  "model":"gpt-4-0125-preview",
-  "messages":[
-    {"role": "system", "content": initial_prompt},
-  ]
-}
-
-answer = ""
-prev_question=""
-finished = False
-initial_question = True
-verification_prompt = "NO HALLUCINATION"
-while not finished:
+def generate_text(model_parameters) -> str:
   completion = client.chat.completions.create(
     **model_parameters
   )
 
-  # print(completion.choices[0].message)
+  return completion.choices[0].message.content
 
-  if ("COMPETENCY CHECKED" in completion.choices[0].message.content):
+def generate_question(competency:str, transcript_array: list):
+  # Convert to list of dictionaries using loop and __dict__
+  transcript = []
+  for interaction in transcript_array:
+    transcript.append(interaction.__dict__)
+
+  initial_prompt= initial_prompt_template + competency
+
+  model_parameters = {
+    "model":"gpt-4o",
+    "messages":[
+      {"role": "system", "content": initial_prompt},
+    ]
+  }
+
+  # print(transcript)
+  answer = "" if len(transcript) == 0 else transcript[-1]["content"]
+  prev_question="" if len(transcript) == 0 else transcript[-2]["content"]
+  finished = False
+  initial_question = len(transcript) == 0
+  verification_prompt = "NO HALLUCINATION"
+
+  model_parameters["messages"] += transcript
+  # print(model_parameters["messages"])
+
+  text = generate_text(model_parameters)
+
+  if ("COMPETENCY CHECKED" in text):
     finished = True
-    print("COMPETENCY CHECKED")
+    # print("COMPETENCY CHECKED")
+    return True, "COMPETENCY CHECKED"
   else:
-    print("\nINTERVIEWER:")
-    print(completion.choices[0].message.content)
-    model_parameters["messages"].append(
-      {
-        "role": "assistant",
-        "content" : completion.choices[0].message.content
-      }
-    )
+    # print("\nINTERVIEWER:")
+    # print(text)
 
     if not initial_question:
-      print()
+      # print()
       verification_prompt = verification(
         interviewer_question=prev_question,
         interviewee_answer=answer,
-        interviewer_response=completion.choices[0].message.content,
+        interviewer_response=text,
         initial_prompt=initial_prompt
       )
-    else:
-      initial_question = False
 
-    prev_question = completion.choices[0].message.content
+    prev_question = text
     if "no hallucination" not in verification_prompt.lower():
       model_parameters["messages"].append(
         {
           "role": "user",
-          "content" : verification_prompt
+          "content": verification_prompt
         }
       )
 
-      print("--- HALLUCINATION DETECTED ---")
-    else:
+      text = generate_text(model_parameters)
 
-      print("\nCANDIDATE:")
-      answer = input()
-
-      model_parameters["messages"].append(
-        {
-          "role": "user",
-          "content" : answer
-        }
-      )
-    # print(model_parameters["messages"][1:])
-    # break
+  return False, text
