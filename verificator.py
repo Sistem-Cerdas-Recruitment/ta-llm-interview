@@ -92,14 +92,14 @@ def verification (interviewer_question, interviewee_answer, interviewer_response
 
         if ("no hallucination" in completion.choices[0].message.content):
             finished = True
-            print("no hallucination feedback: " + completion.choices[0].message.content)
+            # print("no hallucination feedback: " + completion.choices[0].message.content)
             return completion.choices[0].message.content
         else:
             finished = True
-            print("interviewer response: " + interviewer_response)
-            print()
-            print("interviewee answer: " + interviewee_answer)
-            print()
-            print("verificator feedback: " + completion.choices[0].message.content)
+            # print("interviewer response: " + interviewer_response)
+            # print()
+            # print("interviewee answer: " + interviewee_answer)
+            # print()
+            # print("verificator feedback: " + completion.choices[0].message.content)
             return completion.choices[0].message.content
 

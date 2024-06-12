@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from verificator import verification
+from TranscriptListItem_schema import TranscriptListItem
 
 load_dotenv()  # take environment variables from .env.
 
@@ -108,13 +109,25 @@ def generate_question(competency:str, transcript_array: list):
   }
 
   # print(transcript)
-  answer = "" if len(transcript) == 0 else transcript[-1]["content"]
-  prev_question="" if len(transcript) == 0 else transcript[-2]["content"]
+  answer = "" if len(transcript) == 0 else transcript[-1]["answer"]
+  prev_question="" if len(transcript) == 0 else transcript[-1]["question"]
   finished = False
   initial_question = len(transcript) == 0
   verification_prompt = "NO HALLUCINATION"
 
-  model_parameters["messages"] += transcript
+  messages = []
+  for chat in transcript:
+    messages.append({
+      "role": "assistant",
+      "content": chat["question"]
+    })
+
+    messages.append({
+      "role": "user",
+      "content": chat["answer"]
+    })
+  
+  model_parameters["messages"] += messages
   # print(model_parameters["messages"])
 
   text = generate_text(model_parameters)
