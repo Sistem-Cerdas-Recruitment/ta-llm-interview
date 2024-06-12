@@ -7,7 +7,7 @@ client = OpenAI()
 
 def generate_model_parameters(skill: str):
     model_parameters = {
-  "model":"gpt-4-0125-preview",
+  "model":"gpt-4o",
   "messages":[
     {"role": "system", "content": f"""
 You are a job interviewer for IT candidate. You will conduct a technical interview with the candidate. 
@@ -86,15 +86,23 @@ SKILL TO BE TESTED: {skill}
     
     return model_parameters
 
-SKILLS = ["Java", "HTML"]
-for skill in SKILLS:
-    print(f"\nSKILL TO BE TESTED: {skill}. Please wait for the question.")
+def generate_question(skill):
     model_parameters = generate_model_parameters(skill)
     completion = client.chat.completions.create(
         **model_parameters
     )
 
-    print("INTERVIEWER:")
-    print(completion.choices[0].message.content)
-    print("INTERVIEWEE:")
-    answer = input()
+    return completion.choices[0].message.content
+
+# SKILLS = ["Java", "HTML"]
+# for skill in SKILLS:
+#     print(f"\nSKILL TO BE TESTED: {skill}. Please wait for the question.")
+#     model_parameters = generate_model_parameters(skill)
+#     completion = client.chat.completions.create(
+#         **model_parameters
+#     )
+
+#     print("INTERVIEWER:")
+#     print(completion.choices[0].message.content)
+#     print("INTERVIEWEE:")
+#     answer = input()

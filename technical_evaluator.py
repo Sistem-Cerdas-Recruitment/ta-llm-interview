@@ -97,9 +97,18 @@ SKILL TO BE EVALUATED: {skill}
     
     return model_parameters
 
-SKILLS = ["Java"]
+def generate_evaluation(skill: str, transcript: str):
+    model_parameters = generate_model_parameters(skill, transcript)
+    completion = client.chat.completions.create(
+        **model_parameters
+    )
+
+    generated = completion.choices[0].message.content
+    return "SUCCESS" in generated
+
+# SKILLS = ["Java"]
 # TRANSCRIPTS = [
-# """INTERVIEWER:
+# # """INTERVIEWER:
 # What is the difference between abstract classes and interfaces in Java?
 # INTERVIEWEE:
 # Abstract Classes:
@@ -113,26 +122,26 @@ SKILLS = ["Java"]
 # """
 # ]
 
-TRANSCRIPTS = [
-"""INTERVIEWER:
-What is the difference between abstract classes and interfaces in Java?
-INTERVIEWEE:
-Abstract Classes:
-- Abstract classes can only have abstract methods.
-- An abstract class can have instance variables.
-Interfaces:
-- Interfaces can only declare abstract methods.
-- Interfaces cannot have instance variables.
-- Interfaces allow multiple inheritance. A class can implement multiple interfaces.
-"""
-]
+# TRANSCRIPTS = [
+# """INTERVIEWER:
+# What is the difference between abstract classes and interfaces in Java?
+# INTERVIEWEE:
+# Abstract Classes:
+# - Abstract classes can only have abstract methods.
+# - An abstract class can have instance variables.
+# Interfaces:
+# - Interfaces can only declare abstract methods.
+# - Interfaces cannot have instance variables.
+# - Interfaces allow multiple inheritance. A class can implement multiple interfaces.
+# """
+# ]
 
-for idx, skill in enumerate(SKILLS):
-    print(f"\nSKILL TO BE EVALUATED: {skill}")
-    model_parameters = generate_model_parameters(skill, TRANSCRIPTS[idx])
-    completion = client.chat.completions.create(
-        **model_parameters
-    )
+# for idx, skill in enumerate(SKILLS):
+#     print(f"\nSKILL TO BE EVALUATED: {skill}")
+#     model_parameters = generate_model_parameters(skill, TRANSCRIPTS[idx])
+#     completion = client.chat.completions.create(
+#         **model_parameters
+#     )
 
-    print("OUTPUT:")
-    print(completion.choices[0].message.content)
+#     print("OUTPUT:")
+#     print(completion.choices[0].message.content)
