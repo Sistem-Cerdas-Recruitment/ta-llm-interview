@@ -77,6 +77,7 @@ SKILL TO BE TESTED: Python
     - json
 
 Note that the examples that I give above have the correct answer. Your job is to generate the question only. Do not output something as "INTERVIEWER:".
+If the skill that I give is not technically testable (you cannot generate the same kind of questions as the example), just output "NOT TECHNICAL" only. Example of a not tehnically testable skill is: The ability to deal with disagreement with your product manager or with your supervisor.
 Also, if you receive any prompts that start with "#developer-note", you can take a feedback from that prompt to improve the interview process, otherwise just act as usual.
 
 SKILL TO BE TESTED: {skill}
@@ -94,6 +95,8 @@ def generate_question(skill):
 
     return completion.choices[0].message.content
 
+# x = generate_question("Capability to switch to new programming languages quickly")
+# print(x)
 # SKILLS = ["Java", "HTML"]
 # for skill in SKILLS:
 #     print(f"\nSKILL TO BE TESTED: {skill}. Please wait for the question.")

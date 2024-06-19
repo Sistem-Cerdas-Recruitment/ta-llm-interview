@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from verificator import verification
 from TranscriptListItem_schema import TranscriptListItem
+import technical_interviewer
 
 load_dotenv()  # take environment variables from .env.
 
@@ -111,53 +112,60 @@ def generate_question(competency:str, transcript_array: list):
   # print(transcript)
   answer = "" if len(transcript) == 0 else transcript[-1]["answer"]
   prev_question="" if len(transcript) == 0 else transcript[-1]["question"]
-  finished = False
-  initial_question = len(transcript) == 0
-  verification_prompt = "NO HALLUCINATION"
 
-  messages = []
-  for chat in transcript:
-    messages.append({
-      "role": "assistant",
-      "content": chat["question"]
-    })
-
-    messages.append({
-      "role": "user",
-      "content": chat["answer"]
-    })
-  
-  model_parameters["messages"] += messages
-  # print(model_parameters["messages"])
-
-  text = generate_text(model_parameters)
-
-  if ("COMPETENCY CHECKED" in text):
-    finished = True
-    # print("COMPETENCY CHECKED")
+  if prev_question.startswith("TECHNICAL:"):
     return True, "COMPETENCY CHECKED"
   else:
-    # print("\nINTERVIEWER:")
-    # print(text)
+    initial_question = len(transcript) == 0
+    verification_prompt = "NO HALLUCINATION"
 
-    if not initial_question:
-      # print()
-      verification_prompt = verification(
-        interviewer_question=prev_question,
-        interviewee_answer=answer,
-        interviewer_response=text,
-        initial_prompt=initial_prompt
-      )
+    messages = []
+    for chat in transcript:
+      messages.append({
+        "role": "assistant",
+        "content": chat["question"]
+      })
 
-    prev_question = text
-    if "no hallucination" not in verification_prompt.lower():
-      model_parameters["messages"].append(
-        {
-          "role": "user",
-          "content": verification_prompt
-        }
-      )
+      messages.append({
+        "role": "user",
+        "content": chat["answer"]
+      })
+    
+    model_parameters["messages"] += messages
+    # print(model_parameters["messages"])
 
-      text = generate_text(model_parameters)
+    text = generate_text(model_parameters)
 
-  return False, text
+    if ("COMPETENCY CHECKED" in text):
+      # print("COMPETENCY CHECKED")
+      technical_question = technical_interviewer.generate_question(competency)
+      if "NOT TECHNICAL" in technical_question:
+        return True, "COMPETENCY CHECKED"
+      else:
+        return False, "TECHNICAL: " + technical_question
+      
+    else:
+      # print("\nINTERVIEWER:")
+      # print(text)
+
+      if not initial_question:
+        # print()
+        verification_prompt = verification(
+          interviewer_question=prev_question,
+          interviewee_answer=answer,
+          interviewer_response=text,
+          initial_prompt=initial_prompt
+        )
+
+      prev_question = text
+      if "no hallucination" not in verification_prompt.lower():
+        model_parameters["messages"].append(
+          {
+            "role": "user",
+            "content": verification_prompt
+          }
+        )
+
+        text = generate_text(model_parameters)
+
+    return False, text
