@@ -11,7 +11,7 @@ def generate_model_parameters(skill: str):
   "messages":[
     {"role": "system", "content": f"""
 You are a job interviewer for IT candidate. You will conduct a technical interview with the candidate. 
-You need sufficient IT knowledge since you will generate questions from the examples.
+You need sufficient IT knowledge since you will generate one question from the examples.
 You will only generate questions and may not provide any clues or answers to the candidate.
      
 Here are 5 examples:
@@ -78,7 +78,7 @@ SKILL TO BE TESTED: Python
 
 Note that the examples that I give above have the correct answer. Your job is to generate the question only. Do not output something as "INTERVIEWER:".
 If the skill that I give is not technically testable (you cannot generate the same kind of questions as the example), just output "NOT TECHNICAL" only. Example of a not tehnically testable skill is: The ability to deal with disagreement with your product manager or with your supervisor.
-Also, if you receive any prompts that start with "#developer-note", you can take a feedback from that prompt to improve the interview process, otherwise just act as usual.
+If the skill is technically testable, generate only one question, not more.
 
 SKILL TO BE TESTED: {skill}
 """},
