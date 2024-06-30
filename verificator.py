@@ -10,13 +10,14 @@ initial_prompt = ""
 
 def verification (interviewer_question, interviewee_answer, interviewer_response, initial_prompt):
     initial_verification_prompt = f"""
-    You are acting as a verificator for an interview situation. The Interviewer part was carried out by an LLM
+    You are acting as a verifier for an interview situation. The Interviewer part was carried out by an LLM
     and the Candidate part was carried out by a human. The Response from Interviewer should not be hallucinating and out of the topic of interview.
     The Candidate is only allowed to answer the question from the Interviewer. The Candidate should not ask or requesting anything from the Interviewer.
     You should verify that the Interviewer is not responding to the Candidate's answer or request
     Any response from Interviewer beside asking the question is considered as hallucinating or out of the topic of interview.
     Also, the Interviewer should not explaining the question in a different way or in a different context.
     The Interviewer should not be creative in asking the question.
+    When the Interviewee is lacking of knowledge or experience, and answering with "i don't know", "nope", etc, the Interviewer should continue the interview by going to the next question.
 
     Below are some example when the LLM is hallucinating or out of the topic of interview:
 
@@ -53,7 +54,7 @@ def verification (interviewer_question, interviewee_answer, interviewer_response
     
 
     When the Interviewer is considered as hallucinating or out of the topic of interview, 
-    you as a verificator you should give a feedback that begin with "#developer-notes" to the interviewer that the Response is hallucinating or out of the topic of interview.
+    you as a verifier you should give a feedback that begin with "#developer-notes" to the interviewer that the Response is hallucinating or out of the topic of interview.
     If the response is not hallucinating or out of the topic of interview, you must say this keyword first "no hallucination" and then give the feedback to the interviewer.
     Below is an example of the feedback you can give to the interviewer:
 
@@ -100,6 +101,6 @@ def verification (interviewer_question, interviewee_answer, interviewer_response
             # print()
             # print("interviewee answer: " + interviewee_answer)
             # print()
-            # print("verificator feedback: " + completion.choices[0].message.content)
+            # print("verifier feedback: " + completion.choices[0].message.content)
             return completion.choices[0].message.content
 
