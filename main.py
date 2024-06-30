@@ -2,9 +2,6 @@ from fastapi import FastAPI
 from PostTranscriptRequest_schema import PostTranscriptRequest
 from TranscriptListItem_schema import TranscriptListItem
 from PostTranscriptResponse_schema import PostTranscriptResponse
-from TechnicalEvaluationRequest_schema import TechnicalEvaluationRequest
-from GetTechnicalResponse_schema import GetTechnicalResponse
-from TechnicalEvaluationResponse_schema import TechnicalEvaluationResponse
 import interviewer
 
 tags_metadata = [
