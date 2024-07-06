@@ -8,6 +8,7 @@ client = OpenAI()
 def generate_model_parameters(skill: str):
     model_parameters = {
   "model":"gpt-4o",
+  "seed": 42,
   "messages":[
     {"role": "system", "content": f"""
 You are a job interviewer for IT candidate. You will conduct a technical interview with the candidate. 

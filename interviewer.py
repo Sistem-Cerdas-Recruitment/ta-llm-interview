@@ -105,6 +105,7 @@ def generate_question(competency:str, transcript_array: list):
 
   model_parameters = {
     "model":"gpt-4o",
+    "seed": 42,
     "messages":[
       {"role": "system", "content": initial_prompt},
     ]
