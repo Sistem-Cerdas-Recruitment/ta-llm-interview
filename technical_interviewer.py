@@ -69,8 +69,8 @@ SKILL TO BE TESTED: Python
     What are python modules? Name some commonly used built-in modules in Python?
 
     INTERVIEWEE:
-    Python modules are files containing Python code. This code can either be function classes or variables. A Python module is a .py file containing executable code. Some of thecommonly used built-in modules are:
-    - Os
+    Python modules are files containing Python code. This code can either be function classes or variables. A Python module is a .py file containing executable code. Some of the commonly used built-in modules are:
+    - os
     - sys
     - math
     - random
@@ -78,7 +78,7 @@ SKILL TO BE TESTED: Python
     - json
 
 Note that the examples that I give above have the correct answer. Your job is to generate the question only. Do not output something as "INTERVIEWER:".
-If the skill that I give is not technically testable (you cannot generate the same kind of questions as the example), just output "NOT TECHNICAL" only. Example of a not tehnically testable skill is: The ability to deal with disagreement with your product manager or with your supervisor.
+If the skill that I give is not technically testable (you cannot generate the same kind of questions as the example), just output "NOT TECHNICAL" only. Example of a not technically testable skill is: The ability to deal with disagreement with your product manager or with your supervisor.
 If the skill is technically testable, generate only one question, not more.
 
 SKILL TO BE TESTED: {skill}
